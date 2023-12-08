@@ -1,19 +1,18 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import '../constants/Endpoints.dart';
 import '../models/product.dart';
 import 'package:http/http.dart' as http;
-
 import '../constants/urls.dart';
 
 class ProductController extends GetxController {
-  var productList = <Product>[].obs;
-
+ var productList = <Product>[].obs;
+ // var productList = <Product>[];
+  RxBool productListLoading= true.obs;
   @override
   void onInit() {
-    print("ProdutListController onInit Starts");
-    fetchProductList();
+ //   print("ProdutListController onInit Starts");
+   fetchProductList();
     super.onInit();
   }
 
@@ -22,6 +21,7 @@ class ProductController extends GetxController {
       final url = Uri.parse("https://demo.alorferi.com/api/products");
     //  var url = Uri.https("${Urls.apiServerBaseUrl}${Endpoints.products}");
       var allProductListResponse= await http.get(url);
+      productListLoading=false.obs;
     //  var response = await http.get(url);
       //final response = await http.get(Uri.parse('https://demo.alorferi.com/api/products'));
     //  var response = await http.get(url,headers:
@@ -31,14 +31,14 @@ class ProductController extends GetxController {
 
       if (allProductListResponse.statusCode == 200) {
         print('DEBUG PRINT===========>Products List Fetched===============');
-        print(allProductListResponse.body);
+       // print(allProductListResponse.body);
         Map<String, dynamic> dataMap = jsonDecode(allProductListResponse.body);
-       print(dataMap);
+      // print(dataMap);
         List<dynamic> dataListOfMap = dataMap['data'];  // = [  { "id": "10",    "name": "Samsung 22 Ultra",    "price": 115000, "stock_quantity": 1}, {}]
         for(var productAsMap in dataListOfMap) {
-          print(productAsMap );
-           productList.value.add(Product(
-          //   // productList.add(Product(
+        //  print(productAsMap );
+             productList.value.add(Product(
+               //   //productList.add(Product(
            id: productAsMap["id"],
            name: productAsMap['name'],
            price: productAsMap['price'],
@@ -47,30 +47,30 @@ class ProductController extends GetxController {
           ));
         }
 
-        print('=========================dataMap[meta]==========PRODUCTS OF PAGES EXCLUDING PAGE 1');
+       // print('=========================dataMap[meta]==========PRODUCTS OF PAGES EXCLUDING PAGE 1');
         Map<String,dynamic> dataPagesLoaded =dataMap['meta'];
-        print(dataPagesLoaded);
+       // print(dataPagesLoaded);
         int currentPage=dataPagesLoaded['current_page'];
         int firstPage=dataPagesLoaded['from'];
         int lastPage=dataPagesLoaded['last_page'];
-        print('current_page : ${currentPage}');
-        print('firstPage : ${firstPage}');
-        print('last_page : ${lastPage}');
+     //   print('current_page : ${currentPage}');
+      //  print('firstPage : ${firstPage}');
+      //  print('last_page : ${lastPage}');
 
         if(currentPage==firstPage && lastPage>firstPage ){
           for(int i= currentPage;i<=lastPage;i++){
             var urlPages= Uri.parse("https://demo.alorferi.com/api/products?page=${i+1}");
-            print('DEBUG PRINT===========>urlPages:$urlPages=============');
+          //  print('DEBUG PRINT===========>urlPages:$urlPages=============');
             var allProductListResponseByPage= await http.get(urlPages);
             Map<String, dynamic> dataMapPages = jsonDecode(allProductListResponseByPage.body);
-            print(dataMapPages);
+           // print(dataMapPages);
             List<dynamic> dataListOfMapPages = dataMapPages['data'];  // = [  { "id": "10"
-            print('DEBUG PRINT===========>dataListOfMapPages:=============');
+         //   print('DEBUG PRINT===========>dataListOfMapPages:=============');
 
             for(var productAsMap in dataListOfMapPages) {
-              print(productAsMap );
+          //    print(productAsMap );
               productList.value.add(Product(
-                //   // productList.add(Product(
+     //   //    productList.add(Product(
                   id: productAsMap["id"],
                   name: productAsMap['name'],
                   price: productAsMap['price'],
@@ -85,12 +85,13 @@ class ProductController extends GetxController {
         else {}
 
         print('productList.length ${productList.length}' );
+        //productList.refresh();
       }
       else{
         print('DEBUG PRINT===========>Products List Fetch FAILED=============');
       }
       print('DEBUG PRINT===========>Products List url =============');
-      productList.forEach((element) {print(element.url); });
+    //  productList.forEach((element) {print(element.url); });
 
     } catch (e, s) {
       print("error: $e, stack trace: $s");

@@ -1,60 +1,124 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:display_server_data/pages/loging_page.dart';
 import '../controllers/product_controller.dart';
+import 'my_orders_page.dart';
+import 'my_products_list_page.dart';
 
-class ProductListPage extends StatelessWidget {
+class ProductListPage extends StatefulWidget {
 
 // ProductController controller = Get.put(ProductController());
    ProductListPage({super.key});
 
   @override
+  State<ProductListPage> createState() => _ProductListPageState();
+}
+
+class _ProductListPageState extends State<ProductListPage> {
+  ProductController controller = Get.put(ProductController());
+/*
+  void loadProduct() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      controller.fetchProductList();
+   // controller.productList.refresh();
+    });
+  }
+
+ */
+@override
+void initState(){
+    //loadProduct();
+  //controller.fetchProductList();
+   // controller.productList.refresh();
+    super.initState();
+}
+
+  @override
   Widget build(BuildContext context) {
-    ProductController controller = Get.put(ProductController());
   //  controller.fetchProductList();
     return Scaffold(
-      floatingActionButton: IconButton( tooltip: 'Shopping Cart',
-        icon: Icon( Icons.shopping_cart,size: 30,color: Colors.deepOrange,),onPressed: (){},),
-      //Text('Cart',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color:  Colors.purple),),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
-      appBar: AppBar(title: Text("All Product List"),),
-      body: Obx(()=> ListView.builder(
+      drawer:Drawer(
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: Column(children: [
+            TextButton(onPressed: (){Get.to(()=>MyProductListPage());}, child: Text("My Product List",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))),
+            TextButton(onPressed: (){Get.to(()=>MyOrderPage());}, child: Text("My Orders",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),)),
+            TextButton(onPressed: (){Get.to(()=>ProductListPage());}, child: Text("Product List",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))),
+
+            TextButton(onPressed: (){Get.to(()=>MyProductListPage());}, child: Text("Sellers-build",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))),
+            ElevatedButton(style: ButtonStyle(),onPressed: (){}, child: Text("LOG OUT",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.red)))
+
+          ],
+            ),
+        ),
+        backgroundColor: Colors.lightGreenAccent,
+        elevation: 30,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: Colors.deepPurple, width: 1),
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ) ,
+      appBar: AppBar(
+       // title: Text("Product List: ${controller.productList.length} Item") ,
+      actions: [Text("Total: ${controller.productList.length}"),
+        ElevatedButton(onPressed: (){
+          setState(() {
+          //  controller.fetchProductList();
+             controller.productList.refresh();
+          });
+      }, child: Text(' LOAD Product List',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.purple ),)
+        ),
+        IconButton( tooltip: 'Shopping Cart', icon: Icon( Icons.shopping_cart,size: 30,color: Colors.deepOrange,),onPressed: (){},),
+
+      ],
+      ),
+      body://Obx(()=>
+         ListView.builder(
           itemCount: controller.productList.length,
           itemBuilder: (context, index){
+            //  controller.productList.refresh();
             var product = controller.productList[index];
-        //print("=======================>All Product List: Total Item ${controller.productList.length}");
-        // return Card(
-        //   child: Container(),
-        // );
+            //print("=======================>All Product List: Total Item ${controller.productList.length}");
+            // return Card(
+            //   child: Container(),
+            // );
 
-        return ListTile(
-          minVerticalPadding: 10,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.black, width: 1),
-            borderRadius: BorderRadius.circular(10),),
-          onTap: (){},
-          leading:SizedBox(height: 100,width:100,
-            child: product.url.isNotEmpty?Image.network('https://demo.alorferi.com${product.url}'):null,
+            return ListTile(
+              minVerticalPadding: 10,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Colors.black, width: 1),
+                borderRadius: BorderRadius.circular(10),),
+              onTap: (){},
+              leading:SizedBox(height: 100,width:100,
+                child: product.url.isNotEmpty?Image.network('https://demo.alorferi.com${product.url}'):null,
 
-          ),
-          //trailing: Text('Stock Quantity: ${product.stockQuantity.toString()}'),
-          title: Text(product.name,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.purple ),)  ,
-          subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [Text("ID: ${index+1}",),
-                                  Text('Price: ${product.price.toString()}'),
-                                  Text('Stock Quantity: ${product.stockQuantity.toString()}') ,
-                                    ElevatedButton(onPressed:(){}, child: Text('Add To Cart',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.deepOrange),))],
-                    ) ,
-          isThreeLine: true,
+              ),
+              //trailing: Text('Stock Quantity: ${product.stockQuantity.toString()}'),
+              title: Text(product.name,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.purple ),)  ,
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [Text("ID: ${index+1}",),
+                  Text('Price: ${product.price.toString()}'),
+                  Text('Stock Quantity: ${product.stockQuantity.toString()}') ,
+                  ElevatedButton(
+                      onPressed:(){
+                        Get.to(()=>LoginPage());
+                      },
+                      child: Text('Add To Cart',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.deepOrange),))],
+              ) ,
+              isThreeLine: true,
 
-        );
+            );
 
-      },
+          },
 
-      )
-      ) ,
+        )
+      //  )  // obx
     );
   }
 }

@@ -7,5 +7,5 @@ class Product{
  final String url;
 
   // Product({ required this.id,required this.name,required this.price,required this.stockQuantity});
-Product({ required this.id,required this.name,required this.price ,required this.stockQuantity, required this.url});
+Product({ required this.id,required this.name,required this.price ,required this.stockQuantity,  this.url=''});
 }
