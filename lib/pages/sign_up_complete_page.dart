@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/sign_up_controller.dart';
 
-
+//==========Note: This page is not used===== I used dialogue instead of this page
 class SignUpCompletePage extends StatefulWidget {
   SignUpCompletePage({super.key});
 

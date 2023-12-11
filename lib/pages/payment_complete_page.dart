@@ -17,7 +17,7 @@ class PaymentCompletePage extends StatelessWidget {
             Text('Your Order will arrive within 7-10 Business Day.', style: TextStyle(fontSize: 15,),),
             SizedBox(height: 10,),
             Text('If you have any Question or Concern-', style: TextStyle(fontSize: 15,),),
-            Text('Please Contact Customer Support at 16123.', style: TextStyle(fontSize: 15,color: Colors.cyan),),
+            Text('Please Contact Customer Support at 16123.', style: TextStyle(fontSize: 15,color: Colors.purple),),
             ElevatedButton(onPressed:()=> Get.to(()=>HomePage()), child:  Text('Go to HOME Page', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.purple),),)
           ],
         ),

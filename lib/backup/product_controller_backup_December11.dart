@@ -7,9 +7,7 @@ import '../constants/urls.dart';
 
 class ProductController extends GetxController {
  var productList = <Product>[].obs;
-// List<Product> cartProductList=[];
-  var cartProductList=<Product>[].obs;   // here=================
- // var cartProductListLengthOBSERVE = 0.obs;
+ List<Product> cartProductList=[];
  num totalPriceOfCartItem=0;
  // var productList = <Product>[];
   RxBool productListLoading= true.obs;
@@ -18,7 +16,7 @@ class ProductController extends GetxController {
  //   print("ProdutListController onInit Starts");
    fetchProductList();
    addToCart;
-   //displayCart();
+   displayCart();
     super.onInit();
   }
 
@@ -96,7 +94,7 @@ class ProductController extends GetxController {
       else{
         print('DEBUG PRINT===========>Products List Fetch FAILED=============');
       }
-   //   print('DEBUG PRINT===========>Products List url =============');
+      print('DEBUG PRINT===========>Products List url =============');
     //  productList.forEach((element) {print(element.url); });
 
     } catch (e, s) {
@@ -105,13 +103,13 @@ class ProductController extends GetxController {
   }
 
  void addToCart(Product myCartProduct){
-     cartProductList.value.add(myCartProduct);
-     //cartProductList.add(myCartProduct);
+   //  cartProductList.value.add(myCartProduct);
+   cartProductList.add(myCartProduct);
    // cartProductList.add(myCartProduct);
-  //   cartProductListLengthOBSERVE.value=cartProductList.value.length;
-   print("==========================${cartProductList.length}==============================");
-   for(var v in cartProductList.value){
-    // print('single element of cart ${v.name}');
+   print("==========================${cartProductList.length}====added ===========================");
+   for(var v in cartProductList){
+
+     print('single element of cart ${v.name}');
    }
 
  }
@@ -123,20 +121,13 @@ class ProductController extends GetxController {
    }
  }
 
-// void addTotalPriceOfCartItems(){
-//     for(int i=0;i<cartProductList.length;i++){
-//       totalPriceOfCartItem= totalPriceOfCartItem + cartProductList[i].price;
-//     }
-// }
-  void addTotalPriceOfCartItems(){
+void addTotalPriceOfCartItems(){
     for(int i=0;i<cartProductList.length;i++){
       totalPriceOfCartItem= totalPriceOfCartItem + cartProductList[i].price;
     }
-  }
-
+}
 
 void removeItemFromCart( Product removableProduct){
-
     cartProductList.remove(removableProduct);
 }
 

@@ -70,26 +70,22 @@ MyProductController myProductController= Get.put(MyProductController());
                         child: Text('Edit',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),)),
                     ElevatedButton(
                         onPressed:(){
-                          setState(() {
-                            // code to delete product
-                            showDialog(context: context,
-                                builder: (context)=>AlertDialog(
-                                  title: Text('CONFIRM PRODUCT DELETE ',style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),),
-                                  content: Text('Are You Sure you want to DELETE this product?',style: TextStyle(color: Colors.red, fontWeight: FontWeight.w500),),
-                                  actions: [
-                                    TextButton(onPressed: (){
-                                      myProductController.deleteMyProduct(product);
-                                      Navigator.of(context).pop();
+
+                          // code to delete product
+                          showDialog(context: context,
+                              builder: (context)=>AlertDialog(
+                                title: Text('CONFIRM PRODUCT DELETE ',style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),),
+                                content: Text('Are You Sure you want to DELETE this product?',style: TextStyle(color: Colors.red, fontWeight: FontWeight.w500),),
+                                actions: [
+                                  TextButton(onPressed: (){
+                                    myProductController.deleteMyProduct(product);
+                                    Navigator.of(context).pop();
                                     } ,
-                                        child: Text('YES',style: TextStyle(color: Colors.red),)),
-                                    TextButton(onPressed:  (){Navigator.of(context).pop();}, child: Text('NO',style: TextStyle(color: Colors.deepPurple),))
-                                  ],
-                                )) ;
-                            // myProductController.deleteMyProduct(product);
-
-                          });
-
-
+                                      child: Text('YES',style: TextStyle(color: Colors.red),)),
+                                  TextButton(onPressed:  (){Navigator.of(context).pop();}, child: Text('NO',style: TextStyle(color: Colors.deepPurple),))
+                                ],
+                              )) ;
+                          // myProductController.deleteMyProduct(product);
                         },
                         child: Text('Delete',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),))
 

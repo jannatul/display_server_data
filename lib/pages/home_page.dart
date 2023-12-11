@@ -1,10 +1,8 @@
-import 'package:display_server_data/pages/product_list_page.dart';
 import 'package:display_server_data/pages/product_view_page.dart';
 import 'package:display_server_data/pages/sellers_view_page.dart';
 import 'package:display_server_data/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'loging_page.dart';
 
 class HomePage extends StatefulWidget {

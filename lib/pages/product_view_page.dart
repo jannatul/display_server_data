@@ -1,10 +1,10 @@
-import 'package:display_server_data/controllers/cart_controller.dart';
+import 'package:display_server_data/backup/cart_controller.dart';
 import 'package:display_server_data/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:display_server_data/pages/loging_page.dart';
 import '../controllers/product_controller.dart';
-import 'checkou_payment_page.dart';
+import 'checkout_payment_page.dart';
 import 'my_products_list_page.dart';
 
 class ProductViewPage extends StatefulWidget {

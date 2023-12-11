@@ -2,6 +2,7 @@ import 'package:display_server_data/controllers/product_controller.dart';
 import 'package:display_server_data/pages/payment_complete_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 class CheckoutPaymentPage extends StatefulWidget {
   CheckoutPaymentPage({super.key});
 
@@ -10,12 +11,15 @@ class CheckoutPaymentPage extends StatefulWidget {
 }
 
 class _CheckoutPaymentPageState extends State<CheckoutPaymentPage> {
-ProductController controllerPayment = ProductController();
+
+//ProductController controllerPayment = ProductController();
+ProductController controllerPayment = Get.find();
+
 String selectedPaymentOption='None';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Payment Page"),),
+      appBar: AppBar(title: Text("Payment Page"),elevation: 20,backgroundColor: Colors.purpleAccent,),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

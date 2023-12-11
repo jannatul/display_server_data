@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:display_server_data/controllers/sign_up_controller.dart';
 import 'home_page.dart';
-import 'package:display_server_data/pages/sign_up_complete_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});

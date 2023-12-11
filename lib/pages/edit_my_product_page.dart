@@ -12,7 +12,7 @@ class EditMyProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Edit Product Page'),),
+      appBar: AppBar(title: Text('Edit Product Page'),elevation: 20,backgroundColor: Colors.purpleAccent,),
       body: SafeArea(
         child: Column(
           children: [ SizedBox(child: Image.network('https://demo.alorferi.com${editProduct.url}'), height: 60,width: 60,),

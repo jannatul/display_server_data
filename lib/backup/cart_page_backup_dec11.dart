@@ -16,18 +16,21 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar:AppBar(title: Text('Cart Page'),elevation: 20,backgroundColor: Colors.purpleAccent,
+      appBar:
+      AppBar(title: Text('Cart Page'),
         actions: [
           //Text("TOTAL ITEM: ${cartPageCartController.cartProductList.length}  "),
           ElevatedButton(onPressed: (){
             setState(() {
-             // controller2.displayCart();
+              //  controller.fetchProductList();
+              controller2.displayCart();
               for (var v in controller2.cartProductList){
-                //print('v.runtimeType ${v.runtimeType}');
-                //print('v.toString() ${v.toString()}');
+                print('v.runtimeType ${v.runtimeType}');
+                print('v.toString() ${v.toString()}');
+
               }
-            //cartPageCartController.cartProductList.refresh();
-              print(' there are ${controller2.cartProductList.length}  products in cart');
+             // cartPageCartController.cartProductList.refresh();
+              print(' there are ${controller2.cartProductList.length}  product in cart');
             });
           }, child: Text('Click to LOAD Cart',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.purple ),)
           ),
@@ -85,13 +88,10 @@ class _CartPageState extends State<CartPage> {
          children: [
            ElevatedButton(onPressed: (){
              setState(() {
-               controller2.totalPriceOfCartItem=0;// without this line totalPriceOfCartItem WRONG
-               controller2.addTotalPriceOfCartItems();
-             //  controller2.totalPriceOfCartItem;
-                         });
-             },
-               child: Text('Click to Load Total Price')),
-           Text('Total Price: ${controller2.totalPriceOfCartItem}', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orange),),
+               controller2.totalPriceOfCartItem;
+                         });},
+               child: Text('Click to Load Total Price${controller2.totalPriceOfCartItem}')),
+           Text('Total Price: ${controller2.totalPriceOfCartItem}'),
            ElevatedButton(onPressed: (){Get.to(()=>CheckoutPaymentPage());}, child: Text('Proceed To CHECKOUT'))
          ],),
 
