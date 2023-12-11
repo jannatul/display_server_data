@@ -1,9 +1,8 @@
-import 'package:display_server_data/pages/my_products_list_page.dart';
 import 'package:flutter/material.dart';
-import 'package:display_server_data/controllers/my_products_controller.dart';
 import 'package:get/get.dart';
-
 import '../models/product.dart';
+import 'package:display_server_data/pages/my_products_list_page.dart';
+import 'package:display_server_data/controllers/my_products_controller.dart';
 
 class EditMyProductPage extends StatelessWidget {
   Product editProduct;
@@ -35,21 +34,22 @@ class EditMyProductPage extends StatelessWidget {
             ElevatedButton(
               child: Text('Submit'),
               onPressed: (){
+
                 if(editMyProductController.editProductName.text.isEmpty || editMyProductController.editPrice.text.isEmpty||editMyProductController.editStockQuantity.text.isEmpty)
                 {
-                  Get.snackbar('Error', 'Please Enter All fields',backgroundColor: Colors.orangeAccent,duration: Duration(seconds: 5));
+                //  Get.snackbar('Error', 'Please Enter All fields',backgroundColor: Colors.orangeAccent,duration: Duration(seconds: 5));
+                  Get.snackbar('Error', 'Please Enter All fields');
                 }
-                else if(editMyProductController.editProductName.text.isNotEmpty && editMyProductController.editPrice.text.isNotEmpty && editMyProductController.editStockQuantity.text.isNotEmpty)
+               // else if(editMyProductController.editProductName.text.isNotEmpty && editMyProductController.editPrice.text.isNotEmpty && editMyProductController.editStockQuantity.text.isNotEmpty)
+                else
                 {
                   editMyProductController.editMyProduct(editProduct);
-                  Get.snackbar('Success', 'Product Edit Successful',
-                      backgroundColor: Colors.purpleAccent,
-                      borderColor: Colors.black87,
-                      borderRadius: 5);
+                  Get.snackbar('Success', 'Product Edit Successful',);
 
-                  Get.to(MyProductListPage());
+                  // Get.to(()=>HomePage());
+                   Get.to(()=>MyProductListPage());
                 }
-                else{}
+             //   else{}
                 },
             ),
 

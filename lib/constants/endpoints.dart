@@ -5,4 +5,5 @@ class Endpoints {
 
   static const myProducts = "/api/my-products";
   static const users = "/api/users";
+
 }

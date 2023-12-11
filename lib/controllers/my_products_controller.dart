@@ -15,6 +15,7 @@ LogInController logInController = Get.put(LogInController());
 final TextEditingController editProductName =TextEditingController();
 final TextEditingController editPrice=TextEditingController();
 final TextEditingController editStockQuantity=TextEditingController();
+final TextEditingController createNewProductId=TextEditingController();
 @override
 void onInit() {
   print("call ProdutListController onInit");  // this line not printing
@@ -102,6 +103,40 @@ deleteMyProduct(Product product) async {
     Get.snackbar('Delete', 'Product  Delete successful');
   } else {
     print('====================> product Delete  Failed');
+  }
+}
+
+createMyProduct() async {
+  //CREATE NEW PRODUCT
+  //final url2 = Uri.parse("https://demo.alorferi.com/api/my-products/18");
+  final url2 = Uri.parse("https://demo.alorferi.com/api/my-products");
+  // Get.to(()=>EditMyProductPage(editableProduct));
+  //  Map <String, String>authorizationHeaderEditProduct= {'Content-Type':'multipart/form-data', 'Authorization':authorizationToken};
+  Map <String, String>authorizationHeaderEditProduct= { 'Authorization':'Bearer ${logInController.accessToken.value}'};
+ // Map editProduct1={'id': '${createNewProductId.text}', 'name': '${editProductName.text}','price': '${editPrice.text}', 'stock_quantity': '${editStockQuantity.text}'};
+  Map editProduct1={'name': '${editProductName.text}','price': '${editPrice.text}', 'stock_quantity': '${editStockQuantity.text}'};
+  //var productEditResponse= await httpJannatul.put(url3,headers: authorizationHeaderEditProduct,body:jsonEncode(editProduct3 ));
+  var productCreateResponse= await httpJannatul.post(url2,headers: authorizationHeaderEditProduct,body:editProduct1 );
+  print("productCreateResponse.statusCode   ${productCreateResponse.statusCode}");
+  print("productCreateResponse.body   ${productCreateResponse.body}");
+  //   if(productEditResponse.statusCode==200){
+  //     print('====================> editProduct1  successful');
+  //   } else {
+  //     print('====================> editProduct1  Failed');
+  //   }
+//var productEditResponseMultiPart=
+//    final  request = httpJannatul.MultipartRequest('PUT', url3)
+//      ..fields['Authorization'] = authorizationToken
+//      ..fields['Name'] = 'Nokia A02 Updated600'
+//      ..fields['price'] = '66666';
+//
+//    final response = await request.send();
+//    final responseBody = await response.stream.bytesToString();
+//    print('RESPONSE BODY:   $responseBody');
+  if(productCreateResponse.statusCode ==200){
+    print('====================> productCreateResponse  successful');
+  } else {
+    print('====================> productCreateResponse multipart  Failed');
   }
 }
 

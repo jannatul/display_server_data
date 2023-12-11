@@ -7,12 +7,16 @@ import '../constants/urls.dart';
 
 class ProductController extends GetxController {
  var productList = <Product>[].obs;
+ List<Product> cartProductList=[];
+ num totalPriceOfCartItem=0;
  // var productList = <Product>[];
   RxBool productListLoading= true.obs;
   @override
   void onInit() {
  //   print("ProdutListController onInit Starts");
    fetchProductList();
+   addToCart;
+   displayCart();
     super.onInit();
   }
 
@@ -97,4 +101,35 @@ class ProductController extends GetxController {
       print("error: $e, stack trace: $s");
     }
   }
+
+ void addToCart(Product myCartProduct){
+   //  cartProductList.value.add(myCartProduct);
+   cartProductList.add(myCartProduct);
+   // cartProductList.add(myCartProduct);
+   print("==========================${cartProductList.length}====added ===========================");
+   for(var v in cartProductList){
+
+     print('single element of cart ${v.name}');
+   }
+
+ }
+
+ void displayCart(){
+   for (var v in cartProductList){
+     print('v.runtimeType ${v.runtimeType}');
+     print('v.toString() ${v.toString()}');
+   }
+ }
+
+void addTotalPriceOfCartItems(){
+    for(int i=0;i<cartProductList.length;i++){
+      totalPriceOfCartItem= totalPriceOfCartItem + cartProductList[i].price;
+    }
+}
+
+void removeItemFromCart( Product removableProduct){
+    cartProductList.remove(removableProduct);
+}
+
+
 }

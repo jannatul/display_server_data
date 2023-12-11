@@ -1,13 +1,12 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
+import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as httpJannatul;
-
 import '../pages/my_products_list_page.dart';
 import '../pages/product_list_page.dart';
 
 class LogInController extends GetxController{
+
 final TextEditingController userNameController =TextEditingController();
 final TextEditingController passWordController=TextEditingController();
 var isLoading = false.obs;
@@ -15,9 +14,9 @@ bool logInIsSuccessful=false;
 var accessToken=''.obs;
 @override
 void onInit() {
-  print("call LogInController onInit");  // this line not printing
+  //print("call LogInController onInit");  // this line not printing
   // checkIsLogin();
-  logInToken ();
+  //logInToken (); // commented this to stop login Fail Snackbar at start of page
   super.onInit();
 }
 Future <void> logInToken () async {

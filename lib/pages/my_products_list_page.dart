@@ -1,7 +1,8 @@
-import 'package:display_server_data/controllers/my_products_controller.dart';
-import 'package:display_server_data/pages/edit_my_product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:display_server_data/controllers/my_products_controller.dart';
+import 'package:display_server_data/pages/create_my_product_page.dart';
+import 'package:display_server_data/pages/edit_my_product_page.dart';
 import 'package:display_server_data/controllers/log_in_controller.dart';
 
 class MyProductListPage extends StatefulWidget {
@@ -21,11 +22,15 @@ MyProductController myProductController= Get.put(MyProductController());
      // myProductController.fetchMyProductList(logInController.accessToken.value);
 
     return Scaffold(
-      appBar: AppBar( actions: [ 
-        ElevatedButton( child: Text("LOAD My Product Page"),
+      appBar: AppBar(
+
+        actions: [
+          ElevatedButton(onPressed: (){Get.to(()=>CreateMyProductPage());}, child: Text("CREATE NEW Product",style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),)),
+
+        ElevatedButton( child: Text("LOAD My Products"),
                        onPressed: (){
                           setState(() {
-                                  myProductController.fetchMyProductList(logInController.accessToken.value);
+                                //  myProductController.fetchMyProductList(logInController.accessToken.value);
                                      myProductController.myProductList.refresh();
                                 });
     }), 
@@ -88,7 +93,7 @@ MyProductController myProductController= Get.put(MyProductController());
             },
 
           )
-      )
+      ),
 
     );
   }

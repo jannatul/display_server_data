@@ -1,11 +1,11 @@
+import 'package:display_server_data/pages/home_page.dart';
 import 'package:display_server_data/pages/loging_page.dart';
 import 'package:flutter/material.dart';
 import 'pages/product_list_page.dart';
 import 'package:get/get.dart';
 void main() async {
-
+  WidgetsFlutterBinding.ensureInitialized();
   runApp( MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: //LoginPage()
-      ProductListPage(),
+      //ProductListPage(),
+      HomePage(),
     );
   }
 }

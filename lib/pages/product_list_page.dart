@@ -1,8 +1,10 @@
+import 'package:display_server_data/controllers/cart_controller.dart';
+import 'package:display_server_data/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:display_server_data/pages/loging_page.dart';
 import '../controllers/product_controller.dart';
-import 'my_orders_page.dart';
+import 'checkou_payment_page.dart';
 import 'my_products_list_page.dart';
 
 class ProductListPage extends StatefulWidget {
@@ -16,6 +18,7 @@ class ProductListPage extends StatefulWidget {
 
 class _ProductListPageState extends State<ProductListPage> {
   ProductController controller = Get.put(ProductController());
+
 /*
   void loadProduct() {
     setState(() {
@@ -47,11 +50,9 @@ void initState(){
           padding: EdgeInsets.all(20),
           child: Column(children: [
             TextButton(onPressed: (){Get.to(()=>MyProductListPage());}, child: Text("My Product List",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))),
-            TextButton(onPressed: (){Get.to(()=>MyOrderPage());}, child: Text("My Orders",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),)),
-            TextButton(onPressed: (){Get.to(()=>ProductListPage());}, child: Text("Product List",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))),
 
             TextButton(onPressed: (){Get.to(()=>MyProductListPage());}, child: Text("Sellers-build",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))),
-            ElevatedButton(style: ButtonStyle(),onPressed: (){}, child: Text("LOG OUT",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.red)))
+            ElevatedButton(style: ButtonStyle(),onPressed: (){}, child: Text("Additional Feature",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.red)))
 
           ],
             ),
@@ -63,7 +64,7 @@ void initState(){
           borderRadius: BorderRadius.circular(10),
         ),
       ) ,
-      appBar: AppBar(
+      appBar: AppBar(elevation: 20,
        // title: Text("Product List: ${controller.productList.length} Item") ,
       actions: [Text("Total: ${controller.productList.length}"),
         ElevatedButton(onPressed: (){
@@ -73,9 +74,10 @@ void initState(){
           });
       }, child: Text(' LOAD Product List',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.purple ),)
         ),
-        IconButton( tooltip: 'Shopping Cart', icon: Icon( Icons.shopping_cart,size: 30,color: Colors.deepOrange,),onPressed: (){},),
+        IconButton( tooltip: 'Shopping Cart', icon: Icon( Icons.shopping_cart,size: 30,color: Colors.deepOrange,),onPressed: (){Get.to(()=>CartPage());},),
+        Text('(${controller.cartProductList.length})', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.purple, ),)
 
-      ],
+      ]
       ),
       body://Obx(()=>
          ListView.builder(
@@ -107,7 +109,8 @@ void initState(){
                   Text('Stock Quantity: ${product.stockQuantity.toString()}') ,
                   ElevatedButton(
                       onPressed:(){
-                        Get.to(()=>LoginPage());
+                        controller.addToCart(product);
+                        //Get.to(()=>LoginPage());
                       },
                       child: Text('Add To Cart',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.deepOrange),))],
               ) ,
