@@ -1,3 +1,4 @@
+import 'package:display_server_data/backup/product_list_page_backup_dec11.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:display_server_data/controllers/my_products_controller.dart';
@@ -80,6 +81,7 @@ MyProductController myProductController= Get.put(MyProductController());
                                     TextButton(onPressed: (){
                                       myProductController.deleteMyProduct(product);
                                       Navigator.of(context).pop();
+                                      //Get.to(()=>ProductListPage());
                                     } ,
                                         child: Text('YES',style: TextStyle(color: Colors.red),)),
                                     TextButton(onPressed:  (){Navigator.of(context).pop();}, child: Text('NO',style: TextStyle(color: Colors.deepPurple),))
